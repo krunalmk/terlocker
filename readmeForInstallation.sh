@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Open terminal where you saved the terlocker files
 # Grant permissions to checkedLocked.sh
 chmod a+x checkedLocked.sh
 
@@ -6,10 +8,8 @@ chmod a+x checkedLocked.sh
 g++ terlocker.cpp -o terlocker
 
 # Putting checkLocked.sh, terlocker in /usr/local/bin/ so that it can be executed from anywhere
-cd
-CurrDir=$(pwd)
-sudo cp "$CurrDir/terlocker" '/usr/local/bin/'
-sudo cp "$CurrDir/checkLocked.sh" '/usr/local/bin/'
+sudo cp "terlocker" '/usr/local/bin/'
+sudo cp "checkLocked.sh" '/usr/local/bin/'
 
 # Add following commands in .bashrc so that terlocker executes whenever terminal opens
 echo "## For terlocker, made by Krunal" >> ~/.bashrc
