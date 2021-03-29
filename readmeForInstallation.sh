@@ -2,7 +2,7 @@
 
 # Open terminal where you saved the terlocker files
 # Grant permissions to checkedLocked.sh
-chmod a+x checkedLocked.sh
+chmod a+x checkLocked.sh
 
 # Create executable for terlocker
 g++ terlocker.cpp -o terlocker
