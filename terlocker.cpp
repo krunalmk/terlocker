@@ -42,10 +42,10 @@ void lockTerminals_And_UnlockIfUserEntersPassword( char *password){
   YesNoFile.close();
 
   system("clear");
+  system("xmodmap -e \'keycode 52 = 0x0000\'");
   
   for(int i=0;; i++){
     getch( str); // Getting inputs like cmd, texts from user
-
     // Checking each time if YesNo.txt has password set "Yes" or "No"
     fstream File("/home/democratickmk/terlocker/YesNo.txt", ios::out | ios::in);
     File >> strFromYesNoTxt;
@@ -63,10 +63,18 @@ void lockTerminals_And_UnlockIfUserEntersPassword( char *password){
         YesNoFile << "No";
         YesNoFile.close();
         signal(SIGINT,SIG_DFL);
+        system("xmodmap -e \'keycode 52 = 0x7a\'");
         system("clear");
         exit(1);
     }
   }
+}
+
+bool checkForcharZ( char* str){
+    for( int i=0; i< strlen(str); i++)
+        if( str[i] == 'z' || str[i] == 'Z')
+            return true;
+    return false;
 }
 
 int main( int args, char *argv[]){
@@ -99,6 +107,11 @@ int main( int args, char *argv[]){
             return -1;
           }
           else{
+            if( checkForcharZ( str)){
+                cout<<"Password doesn\'t meet the standards"<<endl;
+                exit(0);
+            }
+            
               // Set new password in password.txt
             fstream MyFile("/home/democratickmk/terlocker/password.txt", ios::out | ios::in | ios::trunc);
             MyFile << str;
